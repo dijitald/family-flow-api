@@ -13,8 +13,6 @@ on:
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
   PYTHON_VERSION: '3.10' # set this to the python version to use (supports 3.6, 3.7, 3.8)
-  SCM_DO_BUILD_DURING_DEPLOYMENT: true # set this to true to enable build during deployment, defaults to false
-  ENABLE_ORYX_BUILD: true # set this to true to enable Oryx build, defaults to false
   
 jobs:
   build:
@@ -37,7 +35,7 @@ jobs:
           source venv/bin/activate
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r requirements.txt -t .
 
       # Optional: Add step to run tests here
 
@@ -82,4 +80,3 @@ jobs:
           app-name: 'func-family-flow'
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          
