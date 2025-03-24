@@ -97,7 +97,7 @@ class HouseholdMembership(Base):
     id: Mapped[int] = mapped_column(INTEGER, primary_key=True, autoincrement=True)
     household: Mapped[Household] = relationship("Household", back_populates="users")
     householdid: Mapped[uuid.UUID] = mapped_column(UNIQUEIDENTIFIER, ForeignKey('households.id'))
-    # user: Mapped[User] = relationship("User", back_populates="households")
+    user: Mapped[User] = relationship("User", back_populates="households")
     userid: Mapped[int] = mapped_column(INTEGER, ForeignKey('users.id'))
     role: Mapped[str] = mapped_column(NVARCHAR, default='member')
     balance: Mapped[float] = mapped_column(FLOAT, default=0)
@@ -106,7 +106,7 @@ class HouseholdMembership(Base):
 class Task(Base):
     __tablename__ = 'tasks'
     id: Mapped[int] = mapped_column(INTEGER, primary_key=True, autoincrement=True)
-    # household: Mapped[Household] = relationship("Household", back_populates="tasks")
+    household: Mapped[Household] = relationship("Household", back_populates="tasks")
     householdid: Mapped[uuid.UUID] = mapped_column(UNIQUEIDENTIFIER, ForeignKey('households.id'))
     name: Mapped[str] = mapped_column(NVARCHAR, nullable=False)
     description: Mapped[str] = mapped_column(NVARCHAR, nullable=True)
@@ -129,10 +129,10 @@ class Task(Base):
 class Activity(Base):
     __tablename__ = 'activities'
     id: Mapped[int] = mapped_column(INTEGER, primary_key=True, autoincrement=True)
-    # household: Mapped[Household] = relationship("Household", back_populates="activities")
+    household: Mapped[Household] = relationship("Household", back_populates="activities")
     householdid: Mapped[uuid.UUID] = mapped_column(UNIQUEIDENTIFIER, ForeignKey('households.id'))
     date: Mapped[datetime] = mapped_column(DATETIME2, default=datetime.now)
-    # user: Mapped[User] = relationship("User", back_populates="activities")
+    user: Mapped[User] = relationship("User", back_populates="activities")
     userId: Mapped[int] = mapped_column(INTEGER, ForeignKey('users.id'))
     userName: Mapped[str] = mapped_column(NVARCHAR)
     amount: Mapped[float] = mapped_column(FLOAT, default=0)
