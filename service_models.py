@@ -4,6 +4,7 @@ from function_app_context import context
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy.orm import DeclarativeBase, relationship, mapped_column, Mapped
 from sqlalchemy.dialects.mssql import (DATETIME2, FLOAT, INTEGER, NVARCHAR, UNIQUEIDENTIFIER, BIT)
+from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
 
 class Base(DeclarativeBase):
     def to_dict(self, depth=2):
@@ -145,6 +146,7 @@ try :
     #DATABASE_URL = "mssql+pyodbc://username:password@server:1433/database?driver=ODBC+Driver+18+for+SQL+Server"
     DATABASE_URL = os.getenv("DATABASE_CONNECTIONSTRING")
     engine = create_engine(DATABASE_URL)
+    SQLAlchemyInstrumentor().instrument(engine=engine, service="familyflow")
 #     Base.metadata.create_all(engine)
 
 except Exception as e:

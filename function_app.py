@@ -4,7 +4,6 @@ from azure.monitor.opentelemetry import configure_azure_monitor
 from function_app_context import context
 
 from sqlalchemy.orm import sessionmaker, scoped_session
-from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
 # from service_models import engine
 from service_users import bpUsers
 # from service_households import bpHouseholds
@@ -27,7 +26,14 @@ except Exception as e:
     context.logging.critical(f"Error initializing application: {e}")
     raise e
 
-
+try:
+    # factory = sessionmaker(bind=engine) 
+    # session = scoped_session(factory)
+    # context.session = session
+    context.KEY = os.getenv("DEBUGKEY")
+except Exception as e:
+    context.logging.critical(f"Error initializing database: {e}")
+    raise e
 
 @app.route(route="ping")
 def ping(req: func.HttpRequest) -> func.HttpResponse:
