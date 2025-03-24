@@ -140,16 +140,16 @@ class Activity(Base):
     description: Mapped[str] = mapped_column(NVARCHAR)
     tags: Mapped[str] = mapped_column(NVARCHAR, nullable=True)
     
-# try :
-#     # Set up SQLAlchemy
-#     #DATABASE_URL = "mssql+pyodbc://username:password@server:1433/database?driver=ODBC+Driver+18+for+SQL+Server"
-#     DATABASE_URL = os.getenv("DATABASE_CONNECTIONSTRING")
+try :
+    # Set up SQLAlchemy
+    #DATABASE_URL = "mssql+pyodbc://username:password@server:1433/database?driver=ODBC+Driver+18+for+SQL+Server"
+    DATABASE_URL = os.getenv("DATABASE_CONNECTIONSTRING")
 #     engine = create_engine(DATABASE_URL)
 #     Base.metadata.create_all(engine)
 
-# except Exception as e:
-#     logging.critical(f"Error creating database tables: {e}")
-#     raise
+except Exception as e:
+    logging.critical(f"Error creating database tables: {e}")
+    raise
 # finally:
 #     engine.dispose()
     
