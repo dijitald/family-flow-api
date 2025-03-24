@@ -95,7 +95,7 @@ class User(Base):
 class HouseholdMembership(Base):
     __tablename__ = 'memberships'
     id: Mapped[int] = mapped_column(INTEGER, primary_key=True, autoincrement=True)
-    # household: Mapped[Household] = relationship("Household", back_populates="users")
+    household: Mapped[Household] = relationship("Household", back_populates="users")
     householdid: Mapped[uuid.UUID] = mapped_column(UNIQUEIDENTIFIER, ForeignKey('households.id'))
     # user: Mapped[User] = relationship("User", back_populates="households")
     userid: Mapped[int] = mapped_column(INTEGER, ForeignKey('users.id'))
