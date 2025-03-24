@@ -1,6 +1,10 @@
 import azure.functions as func
-import logging
+import logging, os
+from azure.monitor.opentelemetry import configure_azure_monitor
+from function_app_context import context
 
+configure_azure_monitor(logger_name="familyflow")
+context.logging = logging.getLogger("familyflow")  
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 @app.route(route="ping")
