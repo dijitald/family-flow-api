@@ -75,8 +75,8 @@ class Household(Base):
     name: Mapped[str] = mapped_column(NVARCHAR, nullable=False)
     createdOn: Mapped[datetime] = mapped_column(DATETIME2, default=datetime.now)
     users: Mapped[list["HouseholdMembership"]] = relationship("HouseholdMembership", back_populates="household")
-    # tasks: Mapped[list["Task"]] = relationship("Task", back_populates="household")
-    # activities: Mapped[list["Activity"]] = relationship("Activity", back_populates="household")
+    tasks: Mapped[list["Task"]] = relationship("Task", back_populates="household")
+    activities: Mapped[list["Activity"]] = relationship("Activity", back_populates="household")
 
 class User(Base):
     __tablename__ = 'users'
@@ -89,8 +89,8 @@ class User(Base):
     lastLogon: Mapped[datetime] = mapped_column(DATETIME2, nullable=True)
     avatarPath: Mapped[str] = mapped_column(NVARCHAR, nullable=True)
     householdid: Mapped[uuid.UUID] = mapped_column(UNIQUEIDENTIFIER, ForeignKey('households.id'), nullable=True)
-    # households: Mapped[list["HouseholdMembership"]] = relationship("HouseholdMembership", back_populates="user")
-    # activities: Mapped[list["Activity"]] = relationship("Activity", back_populates="user")
+    households: Mapped[list["HouseholdMembership"]] = relationship("HouseholdMembership", back_populates="user")
+    activities: Mapped[list["Activity"]] = relationship("Activity", back_populates="user")
 
 class HouseholdMembership(Base):
     __tablename__ = 'memberships'
