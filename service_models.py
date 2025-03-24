@@ -74,7 +74,7 @@ class Household(Base):
     id: Mapped[uuid.UUID] = mapped_column(UNIQUEIDENTIFIER, primary_key=True, default=uuid.uuid4)
     name: Mapped[str] = mapped_column(NVARCHAR, nullable=False)
     createdOn: Mapped[datetime] = mapped_column(DATETIME2, default=datetime.now)
-    # users: Mapped[list["HouseholdMembership"]] = relationship("HouseholdMembership", back_populates="household")
+    users: Mapped[list["HouseholdMembership"]] = relationship("HouseholdMembership", back_populates="household")
     # tasks: Mapped[list["Task"]] = relationship("Task", back_populates="household")
     # activities: Mapped[list["Activity"]] = relationship("Activity", back_populates="household")
 
