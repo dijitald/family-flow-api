@@ -4,7 +4,7 @@ from azure.monitor.opentelemetry import configure_azure_monitor
 from function_app_context import context
 
 from sqlalchemy.orm import sessionmaker, scoped_session
-# from service_models import engine
+from service_models import engine
 from service_users import bpUsers
 # from service_households import bpHouseholds
 # from service_tasks import bpTasks
