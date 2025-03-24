@@ -152,6 +152,6 @@ try :
 except Exception as e:
     logging.critical(f"Error creating database tables: {e}")
     raise
-# finally:
-#     engine.dispose()
+finally:
+    engine.dispose()
     

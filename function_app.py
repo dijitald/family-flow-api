@@ -27,9 +27,9 @@ except Exception as e:
     raise e
 
 try:
-    # factory = sessionmaker(bind=engine) 
-    # session = scoped_session(factory)
-    # context.session = session
+    factory = sessionmaker(bind=engine) 
+    session = scoped_session(factory)
+    context.session = session
     context.KEY = os.getenv("DEBUGKEY")
 except Exception as e:
     context.logging.critical(f"Error initializing database: {e}")
