@@ -147,7 +147,7 @@ try :
     DATABASE_URL = os.getenv("DATABASE_CONNECTIONSTRING")
     engine = create_engine(DATABASE_URL)
     SQLAlchemyInstrumentor().instrument(engine=engine, service="familyflow")
-#     Base.metadata.create_all(engine)
+    Base.metadata.create_all(engine)
 
 except Exception as e:
     logging.critical(f"Error creating database tables: {e}")
