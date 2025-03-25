@@ -24,10 +24,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python version
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
+      # - name: Setup Python version
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: ${{ env.PYTHON_VERSION }}
 
       # - name: Create and start virtual environment
       #   run: |
@@ -66,12 +66,12 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip     
         
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F4E6298A8FA346E399E3DD2E0A3AD543 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_60D7C5EEEB9941EEB7B939B78FEC0D98 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6FD859B137644DC386920BE7DAA1BEB3 }}
+      # - name: Login to Azure
+      #   uses: azure/login@v2
+      #   with:
+      #     client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F4E6298A8FA346E399E3DD2E0A3AD543 }}
+      #     tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_60D7C5EEEB9941EEB7B939B78FEC0D98 }}
+      #     subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6FD859B137644DC386920BE7DAA1BEB3 }}
 
       - name: 'Deploy to Azure Functions'
         uses: Azure/functions-action@v1
@@ -79,5 +79,6 @@ jobs:
         with:
           app-name: 'func-family-flow'
           slot-name: 'Production'
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           remote-build: true

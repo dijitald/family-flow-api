@@ -15,10 +15,9 @@ configure_azure_monitor(logger_name="familyflow")
 context.logging = logging.getLogger("familyflow")  
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
-
 try:
-    app.register_blueprint(bpUsers)
     app.register_blueprint(bpHouseholds)
+    app.register_blueprint(bpUsers)
     app.register_blueprint(bpTasks)
     app.register_blueprint(bpActivities)
     app.register_blueprint(bpMembers)
