@@ -81,4 +81,7 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          remote-build: true
+          # remote-build: true
+        env:
+          SCM_DO_BUILD_DURING_DEPLOYMENT: true # This is required for remote build to work
+          ENABLE_ORYX_BUILD: true # This is required for remote build to work
